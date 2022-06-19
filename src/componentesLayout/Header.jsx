@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { styled } from '@mui/material/styles';
-import { Toolbar, Typography, Box, IconButton, Tooltip, Avatar, Container , Menu} from '@mui/material';
+import { Toolbar, Box, IconButton, Avatar, Container, Button, Typography } from '@mui/material';
+import { AuthContext } from '../model/contextos';
 import MuiAppBar from '@mui/material/AppBar';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import logo from './images/logo-site.png'
+import Perfil from './Perfil';
 
 const AppBar = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open', })(({ theme, open }) => ({
     color: '#999',
@@ -15,49 +19,35 @@ const AppBar = styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open',
 
 const Header = ({open}) => {
 
-    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [ancoraMenuPerfil, setAncoraMenuPerfil] = useState(null);
+    const { autenticado, authState } = useContext(AuthContext);
 
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
+    const handleAbrirPerfil = (event) => {
+        setAncoraMenuPerfil(event.currentTarget);
     };
     
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
     return (
         <AppBar position="fixed" open={open}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Typography variant="h6" noWrap component="div">
-                        Mercado Eletrônico
-                    </Typography>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-
-                            açsdlkjfaçslkdjfaçlskjfd
-
-                        </Menu>
+                    <img src={logo} alt='Mercado Eletrônico' />
+                    <Box component='section' sx={{ flexGrow: 0 }}>
+                        {!autenticado && <Button variant="contained">Login</Button>}
+                        {
+                            autenticado && (
+                                <Box component='article' sx={{display: 'flex'}}>
+                                    <Avatar sx={{mr: 1}} >{`${authState.usuario.nome.split(' ')[0][0]}${authState.usuario.nome.split(' ')[1][0]}`}</Avatar>
+                                    <Box>
+                                        <Typography variant='subtitle2' >Bem vindo,</Typography>
+                                        <Typography variant='subtitle1' sx={{color: '#000', lineHeight:0.6,}}>{authState.usuario.nome}</Typography>
+                                    </Box>
+                                    <IconButton onClick={handleAbrirPerfil}>
+                                        <ArrowDropDownIcon />
+                                    </IconButton>
+                                </Box>
+                            )
+                        }
+                        <Perfil ancoraMenuPerfil={ancoraMenuPerfil} setAncoraMenuPerfil={setAncoraMenuPerfil} />
                     </Box>
                 </Toolbar>
             </Container>

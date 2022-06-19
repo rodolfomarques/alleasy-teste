@@ -5,14 +5,17 @@ import Axios from '../API/endpoints';
 const axios = new Axios();
 
 const inicialState = { 
-    usuario: {},
+    usuario: {
+        nome: 'Rodolfo Marques',
+        ultimoAcesso: '01-01-2010T00:00:00.000z'
+    },
     token: ''
 }
 
 
 const AuthController = ({children}) => {
 
-    const [ authState, authDispatch ] = useReducer(authReducer, inicialState)
+    const [ authState, authDispatch ] = useReducer(authReducer, inicialState);
     const [ autenticado, setAutenticado ] = useState(false);
 
     useEffect(() => {

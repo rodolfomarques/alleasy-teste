@@ -1,14 +1,14 @@
 import { styled } from '@mui/material/styles';
 import { Toolbar, List, ListItemButton, ListItemIcon, ListItemText, ListItem } from '@mui/material';
-import MuiDrawer from '@mui/material/Drawer';
 import { Home, Storage, AttachMoney, ShoppingCart, Public, Sell, Help } from '@mui/icons-material';
+import MuiDrawer from '@mui/material/Drawer';
 
-const drawerWidth = 240;
+const larguraSidebar = 240;
 
-const openedMixin = (theme) => ({
+const estiloSidebarAberta = (theme) => ({
     color: '#fff',
     backgroundColor: '#666',
-    width: drawerWidth,
+    width: larguraSidebar,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -16,7 +16,7 @@ const openedMixin = (theme) => ({
     overflowX: 'hidden',
 });
 
-const closedMixin = (theme) => ({
+const estiloSidebarFechada = (theme) => ({
     color: '#fff',
     backgroundColor: '#666',
     transition: theme.transitions.create('width', {
@@ -32,17 +32,17 @@ const closedMixin = (theme) => ({
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
-        width: drawerWidth,
+        width: larguraSidebar,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
         ...(open && {
-            ...openedMixin(theme),
-            '& .MuiDrawer-paper': openedMixin(theme),
+            ...estiloSidebarAberta(theme),
+            '& .MuiDrawer-paper': estiloSidebarAberta(theme),
         }),
         ...(!open && {
-            ...closedMixin(theme),
-            '& .MuiDrawer-paper': closedMixin(theme),
+            ...estiloSidebarFechada(theme),
+            '& .MuiDrawer-paper': estiloSidebarFechada(theme),
         }),
     }),
 );
@@ -62,33 +62,35 @@ const Sidebar = ({open, handleDrawerOpen, handleDrawerClose }) => {
 
     return (
         <aside>
-            <Drawer component='aside' variant="permanent" open={open} onMouseOver={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
+            <Drawer variant="permanent" open={open} onMouseOver={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
                 <Toolbar />
-                <List>
-                    {linksMenu.map((link, i) => (
-                        <ListItem key={`item-menu-${i}`} disablePadding sx={{ display: 'block', }}>
-                            <ListItemButton
-                                sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
+                <nav>
+                    <List>
+                        {linksMenu.map((link, i) => (
+                            <ListItem key={`item-menu-${i}`} disablePadding sx={{ display: 'block', }}>
+                                <ListItemButton
                                     sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                        color: '#fff' 
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
                                     }}
                                 >
-                                    {link.icone}
-                                </ListItemIcon>
-                                <ListItemText primary={link.titulo} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: '#fff' 
+                                        }}
+                                    >
+                                        {link.icone}
+                                    </ListItemIcon>
+                                    <ListItemText primary={link.titulo} sx={{ opacity: open ? 1 : 0 }} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </nav>
             </Drawer>
         </aside>
     );
