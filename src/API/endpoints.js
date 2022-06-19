@@ -6,7 +6,7 @@ export default class Axios {
     retorno(resposta) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(resposta);
+                resolve({status: 200, data: resposta});
             }, Math.random() * 1000)
         });
     }
