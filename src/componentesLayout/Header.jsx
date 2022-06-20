@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom'
 import { styled } from '@mui/material/styles';
 import { Toolbar, Box, IconButton, Avatar, Container, Button, Typography } from '@mui/material';
 import { AuthContext } from '../model/contextos';
@@ -40,7 +39,6 @@ const Header = ({open}) => {
                     <img src={logo} alt='Mercado Eletrônico' />
                     <Box component='section' sx={{ flexGrow: 0 }}>
                         {!autenticado && <Button variant="contained" sx={{mr:1}} onClick={handleAbrirLogin}>Login</Button>}
-                        {!autenticado && <Button variant="outlined" onClick={() => (window.location.assign('/cadastro'))} >Cadastrar</Button>}
                         {
                             autenticado && (
                                 <Box component='article' sx={{display: 'flex'}}>

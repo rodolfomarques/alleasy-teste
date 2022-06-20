@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import { Toolbar, List, ListItemButton, ListItemIcon, ListItemText, ListItem } from '@mui/material';
 import { Home, Storage, AttachMoney, ShoppingCart, Public, Sell, Help } from '@mui/icons-material';
 import MuiDrawer from '@mui/material/Drawer';
@@ -48,21 +49,23 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const linksMenu = [
-    {titulo: 'Home', icone: <Home />},
-    {titulo: 'Lorem Ipsum', icone: <Storage />},
-    {titulo: 'Lorem Ipsum', icone: <AttachMoney />},
-    {titulo: 'Lorem Ipsum', icone: <ShoppingCart />},
-    {titulo: 'Lorem Ipsum', icone: <Public />},
-    {titulo: 'Lorem Ipsum', icone: <Sell />},
-    {titulo: 'Lorem Ipsum', icone: <Help />},
+    {titulo: 'Home', icone: <Home />, onClick: '/'},
+    {titulo: 'Lorem Ipsum', icone: <Storage />, onClick: ''},
+    {titulo: 'Lorem Ipsum', icone: <AttachMoney />, onClick: ''},
+    {titulo: 'Lorem Ipsum', icone: <ShoppingCart />, onClick: ''},
+    {titulo: 'Lorem Ipsum', icone: <Public />, onClick: ''},
+    {titulo: 'Lorem Ipsum', icone: <Sell />, onClick: ''},
+    {titulo: 'Lorem Ipsum', icone: <Help />, onClick: ''},
 ]
 
 
 const Sidebar = ({open, handleDrawerOpen, handleDrawerClose }) => {
 
+    let navigate = useNavigate()
+
     return (
         <aside>
-            <Drawer variant="permanent" open={open} onMouseOver={handleDrawerOpen} onMouseLeave={handleDrawerClose}>
+            <Drawer variant="permanent" open={open} onMouseOver={handleDrawerOpen} onMouseLeave={handleDrawerClose} >
                 <Toolbar />
                 <nav>
                     <List>
@@ -74,6 +77,7 @@ const Sidebar = ({open, handleDrawerOpen, handleDrawerClose }) => {
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
                                     }}
+                                    onClick={() => {navigate(link.onClick)}}
                                 >
                                     <ListItemIcon
                                         sx={{

@@ -2,11 +2,13 @@ import { useContext } from 'react';
 import { AuthContext } from '../model/contextos';
 import { Box, Popover, TextField, Button } from '@mui/material';
 import Axios from '../API/endpoints';
+import { useSnackbar } from 'notistack';
 const axios = new Axios();
 
 const Login = ({ancoraMenuLogin, setAncoraMenuLogin}) => {
 
     const { authDispatch } = useContext(AuthContext);
+    const { enqueueSnackbar } = useSnackbar();
     const abrir = Boolean(ancoraMenuLogin);
 
     const handleFecharLogin = () => {
@@ -25,7 +27,9 @@ const Login = ({ancoraMenuLogin, setAncoraMenuLogin}) => {
             authDispatch({type: 'inserirDadosUsuario', payload: resp.data})
             handleFecharLogin()
         })
-        .catch(err => {console.log(err);})
+        .catch(err => {
+            enqueueSnackbar(err.data, {variant:'error'})
+        })
     };
 
     return (

@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Outlet } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, CssBaseline } from '@mui/material';
 import { InterfaceContext } from '../model/contextos';
@@ -30,9 +31,9 @@ const Layout = ({children}) => {
                 handleDrawerClose={menuSempreAberto? () => {}: fecharBarraLateral} 
                 handleDrawerOpen={menuSempreAberto? () => {}: abrirBarraLateral} 
             />
-            <Box component="main" sx={{ p: 3, backgroundColor: '#eee' }}>
+            <Box component="main" sx={{ p: 3, backgroundColor: '#eee', width: '100%', minHeight: '100vh' }}>
                 <DrawerHeader />
-                {children}
+                <Outlet />
             </Box>
         </Box>
     )

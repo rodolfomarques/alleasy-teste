@@ -2,17 +2,18 @@ import './App.css';
 import AuthController from './controller/AuthController';
 import DataController from './controller/DataController';
 import InterfaceController from './controller/InterfaceController';
-import Layout from './controller/Layout';
 import Rotas from './controller/Rotas';
+import { SnackbarProvider } from 'notistack';
+
 
 function App() {
     return (
         <AuthController>
             <DataController>
                 <InterfaceController>
-                    <Layout>
+                    <SnackbarProvider maxSnack={3}>
                         <Rotas />
-                    </Layout>
+                    </SnackbarProvider>
                 </InterfaceController>
             </DataController>
         </AuthController>

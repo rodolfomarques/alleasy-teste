@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../model/contextos';
 import { Box, Popover, Typography, Avatar, Link, Divider } from '@mui/material';
 import ForumIcon from '@mui/icons-material/Forum';
@@ -8,6 +9,7 @@ import { format } from 'date-fns';
 const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
 
     const { authState, dataDispatch } = useContext(AuthContext);
+    let navigate = useNavigate();
     const abrir = Boolean(ancoraMenuPerfil);
     const linkSize = '14px';
     const linkWeight = '300'
@@ -35,7 +37,7 @@ const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
                     <time datetime={`${authState.usuario.ultimoAcesso}`} >
                         <Typography variant='subtitle2' sx={{fontWeight: '400', color: '#a0a0a0'}}>Último Acesso: {format(new Date(), "dd/MM/yy HH:mm")}</Typography>
                     </time>
-                    <Link href='#' sx={{color: '#000', mt: 1}}><Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}}>Alterar Cadastro</Typography></Link>
+                    <Link sx={{color: '#000', mt: 1}} onClick={() => {navigate('/cadastro')}}><Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}}>Alterar Cadastro</Typography></Link>
                     <Link href='#' sx={{color: '#000'}}><Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}}>Alterar Senha</Typography></Link>
                 </Box>
             </Box>

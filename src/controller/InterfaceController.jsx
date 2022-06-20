@@ -2,8 +2,7 @@ import { useReducer, useEffect, useContext } from "react";
 import { InterfaceContext, AuthContext } from "../model/contextos";
 import { interfaceReducer } from "../model/reduces";
 import { useMediaQuery } from '@mui/material';
-import Axios from '../API/endpoints';
-const axios = new Axios();
+
 
 const inicialState = {
     logado: false

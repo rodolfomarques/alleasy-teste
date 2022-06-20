@@ -1,8 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 import { Box, Typography } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 
 
 const Carrossel = ({listaDeImagens}) => {
