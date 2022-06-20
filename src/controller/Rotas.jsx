@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../views/Home";
+import FormCadastro from "../views/FormCadastro";
 
 const Rotas = () => {
 
@@ -7,6 +8,7 @@ const Rotas = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path='/cadastro' element={<FormCadastro />} />
             </Routes>
         </BrowserRouter>
     )

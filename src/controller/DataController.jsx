@@ -19,6 +19,9 @@ const DataController = ({children}) => {
         axios.get('/produtos')
         .then(resp => { dataDispatch({type: 'inserirProdutos', payload: resp.data}) })
 
+        axios.get('/imagensCarrossel')
+        .then(resp => { dataDispatch({type: 'inserirImagensBanner', payload: resp.data})})
+
     }, [])
 
     return (

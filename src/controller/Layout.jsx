@@ -30,7 +30,7 @@ const Layout = ({children}) => {
                 handleDrawerClose={menuSempreAberto? () => {}: fecharBarraLateral} 
                 handleDrawerOpen={menuSempreAberto? () => {}: abrirBarraLateral} 
             />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ p: 3, backgroundColor: '#eee' }}>
                 <DrawerHeader />
                 {children}
             </Box>

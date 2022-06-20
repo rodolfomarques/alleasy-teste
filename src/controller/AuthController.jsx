@@ -1,15 +1,13 @@
 import { useState, useEffect, useReducer } from "react";
 import { AuthContext } from "../model/contextos";
 import { authReducer } from "../model/reduces";
-import Axios from '../API/endpoints';
-const axios = new Axios();
 
 const inicialState = { 
     usuario: {
-        nome: 'Rodolfo Marques',
-        ultimoAcesso: '01-01-2010T00:00:00.000z'
+        nome: '',
+        ultimoAcesso: ''
     },
-    token: ''
+    autenticado: false
 }
 
 
@@ -19,8 +17,12 @@ const AuthController = ({children}) => {
     const [ autenticado, setAutenticado ] = useState(false);
 
     useEffect(() => {
-        
-    }, [])
+        if(authState.autenticado) {
+            setAutenticado(true);
+        } else {
+            setAutenticado(false);
+        }
+    }, [authState])
 
     return (
         <AuthContext.Provider value={{authState, authDispatch, autenticado}}>

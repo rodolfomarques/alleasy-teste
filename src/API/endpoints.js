@@ -11,6 +11,24 @@ export default class Axios {
         });
     }
 
+    retornoLogin(params) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let usuario = dados.users.find((usuario) => { if(params.email === usuario.email) {return true} else {return false} })
+                if(!usuario) {reject({status: 400, data: 'Usuário não encontrado.'})}
+                else if(usuario.senha !== params.senha) {reject({status: 400, data: 'Senha incorreta.'})}
+                else {
+                    let dadosUsuario = {
+                        nome: usuario.nome,
+                        ultimo_acesso: usuario.ultimo_acesso,
+                        email: usuario.email,
+                    }
+                    resolve({status: 200, data: {...dadosUsuario}})
+                }
+            }, Math.random() * 1000)
+        })
+    }
+
     get(rota) {
 
         switch(rota) {
@@ -25,8 +43,14 @@ export default class Axios {
         }
     }
 
-    post() {
+    post(rota, params) {
 
+        switch(rota) {
+            case '/login':
+                return this.retornoLogin(params);
+            default:
+                return {}
+        }
     }
 
 }

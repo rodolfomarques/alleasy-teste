@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 
 const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
 
-    const { authState } = useContext(AuthContext);
+    const { authState, dataDispatch } = useContext(AuthContext);
     const abrir = Boolean(ancoraMenuPerfil);
     const linkSize = '14px';
     const linkWeight = '300'
@@ -29,7 +29,7 @@ const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
             sx={{mt: 2, mr: 1}}
         >
             <Box component='article' sx={{p: 2, width: '320px', display: 'flex', justifyContent: 'space-between'}}>
-                <Avatar sx={{width:'80px', height: '80px', fontSize: '2rem'}}>{`${authState.usuario.nome.split(' ')[0][0]}${authState.usuario.nome.split(' ')[1][0]}`}</Avatar>
+                <Avatar sx={{width:'80px', height: '80px', fontSize: '2rem'}}>{`${authState.usuario.nome !== '' && authState.usuario.nome.split(' ')[0][0]}${authState.usuario.nome !== '' &&  authState.usuario.nome.split(' ')[1][0]}`}</Avatar>
                 <Box component='section' sx={{display: 'flex', flexDirection: 'column'}}>
                     <Typography variant='subtitle1'>{authState.usuario.nome}</Typography>
                     <time datetime={`${authState.usuario.ultimoAcesso}`} >
@@ -44,7 +44,7 @@ const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
                 <Link href='#' sx={{color: '#000'}}>
                     <Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}} ><ForumIcon fontSize='small' sx={{mr: .5}} />Suporte Online</Typography>
                 </Link>
-                <Link href='#' sx={{color: '#000'}}>
+                <Link href='' sx={{color: '#000'}} onClick={() => {dataDispatch({type: 'logout'})}}>
                     <Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}}><ExitToAppIcon fontSize='small' sx={{mr: .5}} />Logout</Typography>
                 </Link>
             </Box>
