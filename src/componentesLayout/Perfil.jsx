@@ -46,7 +46,7 @@ const Perfil = ({ancoraMenuPerfil, setAncoraMenuPerfil}) => {
                 <Link href='#' sx={{color: '#000'}}>
                     <Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}} ><ForumIcon fontSize='small' sx={{mr: .5}} />Suporte Online</Typography>
                 </Link>
-                <Link href='' sx={{color: '#000'}} onClick={() => {dataDispatch({type: 'logout'})}}>
+                <Link href='' sx={{color: '#000'}} onClick={() => {dataDispatch({type: 'logout'}); navigate('/')}}>
                     <Typography variant='subtitle1' sx={{display: 'flex', alignItems: 'center', fontSize: linkSize, fontWeight: linkWeight}}><ExitToAppIcon fontSize='small' sx={{mr: .5}} />Logout</Typography>
                 </Link>
             </Box>

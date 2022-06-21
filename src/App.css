@@ -1,3 +1,5 @@
+/* Sobreposição de algumas regras de CSS de bibliotecas utilizadas no projeto. */
+
 a {
     text-decoration: none !important;
 }
